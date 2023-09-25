@@ -5,36 +5,46 @@ public class Arvore {
         this.raiz = new No(valor);
     }
 
-    public void inserirNumero(int numero, No raiz) {
-        if (numero < raiz.getChave()) {
-            if (raiz.getEsquerda() == null) {
-                raiz.setFilhoEsquerdo(new No(numero));
-            } else {
-                inserirNumero(numero, raiz.getEsquerda());
+    public void inserirNumero(int numero, No no) {
+        if (this.raiz == null) {
+            this.raiz = new No(numero);
+        }
+        else if (numero < no.getChave()) {
+            if (no.getEsquerda() == null) {
+                no.setFilhoEsquerdo(new No(numero));
             }
-        } else {
-            if (raiz.getDireita() == null) {
-                raiz.setFilhoDireito(new No(numero));
-            } else {
-                inserirNumero(numero, raiz.getDireita());
+            else {
+                inserirNumero(numero, no.getEsquerda());
+            }
+        }
+        else {
+            if (no.getDireita() == null) {
+                no.setFilhoDireito(new No(numero));
+            }
+            else {
+                inserirNumero(numero, no.getDireita());
             }
         }
     }
 
-    public boolean buscarNumero(int numero, No raiz) {
-        if (numero == raiz.getChave()) {
+    public boolean buscarNumero(int numero, No no) {
+        if (numero == no.getChave()) {
             return true;
-        } else if (numero < raiz.getChave()){
-            if (raiz.getEsquerda() == null) {
+        }
+        else if (numero < no.getChave()){
+            if (no.getEsquerda() == null) {
                 return false;
-            } else {
-                return buscarNumero(numero, raiz.getEsquerda());
             }
-        } else {
-            if (raiz.getDireita() == null) {
+            else {
+                return buscarNumero(numero, no.getEsquerda());
+            }
+        }
+        else {
+            if (no.getDireita() == null) {
                 return false;
-            } else {
-                return buscarNumero(numero, raiz.getDireita());
+            }
+            else {
+                return buscarNumero(numero, no.getDireita());
             }
         }
     }
@@ -65,8 +75,8 @@ public class Arvore {
     }
 
     public void apagarNoFolha(No no, No pai) {
-        if (no == raiz) {
-            raiz = null;
+        if (no == this.raiz) {
+            this.raiz = null;
         }
         else {
             if (pai.getDireita() == no) {
@@ -79,8 +89,8 @@ public class Arvore {
     }
 
     public void subirFilho(No filho, No excluido, No pai) {
-        if (excluido == raiz) {
-            raiz = filho;
+        if (excluido == this.raiz) {
+            this.raiz = filho;
         }
         else {
             if (pai.getDireita() == excluido) {
@@ -94,8 +104,8 @@ public class Arvore {
 
     public void trocarNoESucessor(No no, No pai) {
         No sucessor = no.procurarSucessor(no.getDireita(), no);
-        if (no == raiz) {
-            raiz = sucessor;
+        if (no == this.raiz) {
+            this.raiz = sucessor;
         }
         else {
             if (pai.getDireita() == no) {
@@ -124,7 +134,7 @@ public class Arvore {
 
     public void print() {
         Printer printer = new Printer();
-        System.out.println(printer.topDown(raiz));
+        System.out.println(printer.topDown(this.raiz));
         System.out.println();
     }
 
