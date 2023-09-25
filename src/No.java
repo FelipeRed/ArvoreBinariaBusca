@@ -16,7 +16,8 @@ public class No {
                 pai.esquerda = null;
             }
             return no;
-        } else {
+        } 
+        else {
             return procurarSucessor(no.esquerda, no);
         }
     }
